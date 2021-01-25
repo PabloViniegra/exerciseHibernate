@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 25-ene-2021 20:29:02 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="mapping.Disponible" table="disponible" catalog="cine" optimistic-lock="version">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="pid" type="int">
+            <column name="pid" not-null="true" />
+        </property>
+        <property name="sid" type="int">
+            <column name="sid" not-null="true" />
+        </property>
+        <property name="tid" type="int">
+            <column name="tid" not-null="true" />
+        </property>
+        <property name="fila" type="int">
+            <column name="fila" not-null="true" />
+        </property>
+        <property name="letra" type="string">
+            <column name="letra" length="3" not-null="true" />
+        </property>
+        <property name="butacas" type="string">
+            <column name="butacas" length="4" not-null="true" />
+        </property>
+        <property name="estado" type="int">
+            <column name="estado" not-null="true" />
+        </property>
+        <property name="pos" type="int">
+            <column name="pos" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

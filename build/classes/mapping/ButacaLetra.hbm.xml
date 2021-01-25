@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 25-ene-2021 20:29:02 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="mapping.ButacaLetra" table="butaca_letra" catalog="cine" optimistic-lock="version">
+        <id name="pos" type="int">
+            <column name="pos" />
+            <generator class="assigned" />
+        </id>
+        <property name="letra" type="string">
+            <column name="letra" length="10" not-null="true" />
+        </property>
+        <property name="fila" type="int">
+            <column name="fila" not-null="true" />
+        </property>
+        <property name="butaca" type="string">
+            <column name="butaca" length="10" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 25-ene-2021 20:29:02 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="mapping.Infogeneral" table="infogeneral" catalog="cine" optimistic-lock="version">
+        <id name="email" type="string">
+            <column name="email" length="50" />
+            <generator class="assigned" />
+        </id>
+        <property name="telContacto" type="string">
+            <column name="TelContacto" length="20" not-null="true" />
+        </property>
+        <property name="telTaquilla" type="string">
+            <column name="TelTaquilla" length="20" not-null="true" />
+        </property>
+        <property name="parking1" type="string">
+            <column name="Parking_1" length="20" not-null="true" />
+        </property>
+        <property name="parking2" type="string">
+            <column name="Parking_2" length="20" not-null="true" />
+        </property>
+        <property name="direccion1" type="string">
+            <column name="Direccion_1" length="100" not-null="true" />
+        </property>
+        <property name="direccion2" type="string">
+            <column name="Direccion_2" length="100" not-null="true" />
+        </property>
+        <property name="direccion3" type="string">
+            <column name="Direccion_3" length="100" not-null="true" />
+        </property>
+        <property name="direccion4" type="string">
+            <column name="Direccion_4" length="100" not-null="true" />
+        </property>
+        <property name="accesoMinusvalido" type="string">
+            <column name="AccesoMinusvalido" length="10" not-null="true" />
+        </property>
+        <property name="sonido" type="string">
+            <column name="Sonido" length="40" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

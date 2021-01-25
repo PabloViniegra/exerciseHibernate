@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 25-ene-2021 20:29:02 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="mapping.Peliculas" table="peliculas" catalog="cine" optimistic-lock="version">
+        <id name="pid" type="java.lang.Integer">
+            <column name="pid" />
+            <generator class="identity" />
+        </id>
+        <property name="titulo" type="string">
+            <column name="Titulo" length="50" not-null="true" />
+        </property>
+        <property name="director" type="string">
+            <column name="Director" length="50" not-null="true" />
+        </property>
+        <property name="nacionalidad" type="string">
+            <column name="Nacionalidad" length="50" not-null="true" />
+        </property>
+        <property name="genero" type="string">
+            <column name="Genero" length="50" not-null="true" />
+        </property>
+        <property name="clasificacion" type="string">
+            <column name="Clasificacion" length="50" not-null="true" />
+        </property>
+        <property name="descr" type="string">
+            <column name="Descr" length="4000" not-null="true" />
+        </property>
+        <property name="duracion" type="double">
+            <column name="Duracion" precision="22" scale="0" not-null="true" />
+        </property>
+        <property name="actores" type="string">
+            <column name="Actores" length="100" not-null="true" />
+        </property>
+        <property name="linkExterior" type="string">
+            <column name="Link_Exterior" length="100" not-null="true" />
+        </property>
+        <property name="linkImagen" type="string">
+            <column name="Link_Imagen" length="100" not-null="true" />
+        </property>
+        <property name="estado" type="int">
+            <column name="Estado" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>
