@@ -1,0 +1,21 @@
+
+version: '3'
+
+services:
+  db:
+    container_name: db-cine
+    image: mysql:latest
+    environment:
+      MYSQL_DATABASE: 'cine'
+      MYSQL_USER: 'root'
+      MYSQL_PASSWORD: 'root'
+      MYSQL_ROOT_PASSWORD: 'root'
+    ports:
+      - '3306:3306'
+    expose:
+      - '3306'
+    volumes:
+      -  db-cine:/var/lib/mysql
+volumes:
+  db-cine:
+
