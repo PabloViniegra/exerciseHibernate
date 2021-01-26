@@ -5,6 +5,7 @@
  */
 package ejerciciocinead;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import mapping.Peliculas;
@@ -19,6 +20,10 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        
+        //Opciones nuevas:
+        //Mostrar numero de peliculas que tengo en la BBDD
+        //Mostrar todas las peliculas en las que trabaja un determinado actor
         Scanner sc = new Scanner(System.in);
         int opcion = -1;
         CineDTO cdto = new CineDTO();
@@ -30,6 +35,8 @@ public class Main {
             System.out.println("3. Modificar película");
             System.out.println("4. Borrar película");
             System.out.println("5. Consultar Película");
+            System.out.println("6. Número de peliculas");
+            System.out.println("7. Películas donde trabaja un actor");
             System.out.println("0. Salir");
             System.out.print("Introduce opcion: ");
             opcion = sc.nextInt();
@@ -50,6 +57,12 @@ public class Main {
                     break;
                 case 5:
                     dameEstaPelícula(sc,cdto,peliculas);
+                    break;
+                case 6:
+                    numeroDePelículas(peliculas);
+                    break;
+                case 7:
+                    verPeliculasDeActor(cdto,sc);
                     break;
             }
         }while (opcion != 0);
@@ -142,6 +155,20 @@ public class Main {
         System.out.println(p.toString());
                
     }
+
+    private static void numeroDePelículas(List<Peliculas> peliculas) {
+        System.out.println("Hay un total de " + peliculas.size() + " en la Base de Datos");
+    }
+
+    private static void verPeliculasDeActor(CineDTO cdto, Scanner sc) {
+        System.out.print("Nombre del actor: ");
+        String respuesta = sc.nextLine();
+        List<Peliculas> temporal = new ArrayList<Peliculas>();
+        temporal = cdto.peliculasDeEsteActor(respuesta);
+        temporal.forEach(System.out::println);
+    }
+    
+    
 
     
 

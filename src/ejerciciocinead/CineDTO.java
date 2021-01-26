@@ -28,6 +28,20 @@ public class CineDTO {
         throw new HibernateException("Error en la capa de acceso a datos", he);
     }
     
+    public List<Peliculas> peliculasDeEsteActor(String aux) {
+        List<Peliculas> peliculas;
+        try {
+            iniciaOperacion();
+            peliculas = sesion.createQuery("from Peliculas p where p.actores='" + aux + "'").list();
+        }catch(HibernateException e) {
+            manejaExcepcion(e);
+            throw e;
+        } finally {
+            sesion.close();
+        }
+        return peliculas;
+    }
+    
     public int nuevaPelicula(Peliculas p) throws HibernateException {
         int id;
         try {
