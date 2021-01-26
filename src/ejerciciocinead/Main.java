@@ -8,6 +8,7 @@ package ejerciciocinead;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import mapping.Disponible;
 import mapping.Peliculas;
 
 /**
@@ -24,10 +25,13 @@ public class Main {
         //Opciones nuevas:
         //Mostrar numero de peliculas que tengo en la BBDD
         //Mostrar todas las peliculas en las que trabaja un determinado actor
+        //Hacer una reserva ,estado 0 = libre, estado 1 = ocupado
         Scanner sc = new Scanner(System.in);
         int opcion = -1;
         CineDTO cdto = new CineDTO();
+        DisponibleDTO dto = new DisponibleDTO();
         List<Peliculas> peliculas = null;
+        List<Disponible> disponibles = null;
         do {
             System.out.println("MENÚ");
             System.out.println("1. Ver Peliculas existentes");
@@ -37,6 +41,7 @@ public class Main {
             System.out.println("5. Consultar Película");
             System.out.println("6. Número de peliculas");
             System.out.println("7. Películas donde trabaja un actor");
+            System.out.println("8. Reservar sala");
             System.out.println("0. Salir");
             System.out.print("Introduce opcion: ");
             opcion = sc.nextInt();
@@ -63,6 +68,9 @@ public class Main {
                     break;
                 case 7:
                     verPeliculasDeActor(cdto,sc);
+                    break;
+                case 8:
+                    verSalaDisponible(disponibles,sc,dto);
                     break;
             }
         }while (opcion != 0);
@@ -166,6 +174,11 @@ public class Main {
         List<Peliculas> temporal = new ArrayList<Peliculas>();
         temporal = cdto.peliculasDeEsteActor(respuesta);
         temporal.forEach(System.out::println);
+    }
+
+    private static void verSalaDisponible(List<Disponible> disponibles, Scanner sc, DisponibleDTO dto) {
+        disponibles = dto.listaDisponibles();
+        
     }
     
     
