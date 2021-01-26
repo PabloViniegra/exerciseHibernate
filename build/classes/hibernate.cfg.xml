@@ -45,6 +45,7 @@ Contributor(s):
     <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
     <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/cine?zeroDateTimeBehavior=convertToNull</property>
     <property name="hibernate.connection.username">root</property>
+    <property name="hibernate.connection.password">root</property>
     <mapping resource="mapping/ButacaLetra.hbm.xml"/>
     <mapping resource="mapping/Pagos.hbm.xml"/>
     <mapping resource="mapping/PeliculaSala.hbm.xml"/>
