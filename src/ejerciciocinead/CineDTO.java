@@ -101,5 +101,31 @@ public class CineDTO {
         return lista;
     }
     
+    public List<Peliculas> peliculasDeEsteActor(String aux) {
+        List<Peliculas> peliculas;
+        try {
+            iniciaOperacion();
+            peliculas = sesion.createQuery("from Peliculas p where p.actores='" + aux + "'").list();
+        }catch(HibernateException e) {
+            manejaExcepcion(e);
+            throw e;
+        } finally {
+            sesion.close();
+        }
+        return peliculas;
+    }
+    
+    public Long numeroPeliculas() {
+        try {
+            iniciaOperacion();
+            return (Long) sesion.createQuery("select count(*) from Peliculas").uniqueResult();
+        }catch(HibernateException e) {
+            manejaExcepcion(e);
+            throw e;
+        } finally {
+            sesion.close();
+        }
+        
+    }
     
 }

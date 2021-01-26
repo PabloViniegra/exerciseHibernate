@@ -5,8 +5,11 @@
  */
 package ejerciciocinead;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
+import mapping.Disponible;
 import mapping.Peliculas;
 
 /**
@@ -22,7 +25,9 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         int opcion = -1;
         CineDTO cdto = new CineDTO();
+        DisponibleDTO dto = new DisponibleDTO();
         List<Peliculas> peliculas = null;
+        List<Disponible> disponibles = null;
         do {
             System.out.println("MENÚ");
             System.out.println("1. Ver Peliculas existentes");
@@ -30,29 +35,41 @@ public class Main {
             System.out.println("3. Modificar película");
             System.out.println("4. Borrar película");
             System.out.println("5. Consultar Película");
+            System.out.println("6. Número de peliculas");
+            System.out.println("7. Películas donde trabaja un actor");
+            System.out.println("8. Reservar sala");
             System.out.println("0. Salir");
             System.out.print("Introduce opcion: ");
             opcion = sc.nextInt();
             sc.nextLine();
-            switch(opcion) {
+            switch (opcion) {
                 case 1:
                     peliculas = null;
                     verPeliculas(cdto, peliculas);
                     break;
                 case 2:
-                    insertarNuevaPelicula(cdto,sc);
+                    insertarNuevaPelicula(cdto, sc);
                     break;
                 case 3:
-                    modificarPelicula(cdto,peliculas,sc);
+                    modificarPelicula(cdto, peliculas, sc);
                     break;
                 case 4:
-                    borrarPelicula(cdto,sc, peliculas);
+                    borrarPelicula(cdto, sc, peliculas);
                     break;
                 case 5:
-                    dameEstaPelícula(sc,cdto,peliculas);
+                    dameEstaPelícula(sc, cdto, peliculas);
+                    break;
+                case 6:
+                    numeroDePelículas(cdto);
+                    break;
+                case 7:
+                    verPeliculasDeActor(cdto, sc);
+                    break;
+                case 8:
+                    verSalaDisponible(disponibles, sc, dto);
                     break;
             }
-        }while (opcion != 0);
+        } while (opcion != 0);
     }
 
     private static void insertarNuevaPelicula(CineDTO cdto, Scanner sc) {
@@ -81,22 +98,22 @@ public class Main {
         System.out.println("Estado[entero]: ");
         p.setEstado(sc.nextInt());
         sc.nextLine();
-        
+
         int id = cdto.nuevaPelicula(p);
         System.out.println("Película insertada con éxito, su id es " + id);
-        
+
     }
 
     private static void verPeliculas(CineDTO cdto, List<Peliculas> peliculas) {
         peliculas = cdto.obtenListaPeliculas();
         System.out.println("PID   TITULO   DIRECTOR     NACIONALIDAD   GÉNERO   CLASIFICACION    DESCR   DURACIÓN    ACTORES    LINK_EXT     LINK_IMAGEN    ESTADO");
         peliculas.forEach(p -> {
-            System.out.println(p.getPid()  + " " + p.getTitulo() + " " + p.getDirector() +
-                    " " + p.getNacionalidad() + p.getGenero() + " " + p.getClasificacion() +
-                    " " + p.getDescr() + p.getDuracion() + " " + p.getActores() + " " +
-                    p.getLinkExterior() + " " + p.getLinkImagen() + " " + p.getEstado());
+            System.out.println(p.getPid() + " " + p.getTitulo() + " " + p.getDirector()
+                    + " " + p.getNacionalidad() + p.getGenero() + " " + p.getClasificacion()
+                    + " " + p.getDescr() + p.getDuracion() + " " + p.getActores() + " "
+                    + p.getLinkExterior() + " " + p.getLinkImagen() + " " + p.getEstado());
         });
-        
+
     }
 
     private static void modificarPelicula(CineDTO cdto, List<Peliculas> peliculas, Scanner sc) {
@@ -140,19 +157,31 @@ public class Main {
         Peliculas p = cdto.obtenPelicula(id);
         System.out.println("PELÍCULA------");
         System.out.println(p.toString());
-               
+
     }
 
     
 
- 
+    private static void verPeliculasDeActor(CineDTO cdto, Scanner sc) {
+        System.out.print("Nombre del actor: ");
+        String respuesta = sc.nextLine();
+        List<Peliculas> temporal = cdto.peliculasDeEsteActor(respuesta);
+        temporal.forEach(System.out::println);
+    }
 
-    
+    private static void verSalaDisponible(List<Disponible> disponibles, Scanner sc, DisponibleDTO dto) {
+        disponibles = dto.listaDisponibles();
+        disponibles.forEach(System.out::println);
+        System.out.print("Introduce el id de la sala que quieras reservar: ");
+        int respuesta = sc.nextInt();
+        sc.nextLine();
+        Disponible aux = dto.obtenerDisponible(respuesta);
+        System.out.println("Evaluando condiciones");
+        dto.reservar(aux);
+    }
 
-    
+    private static void numeroDePelículas(CineDTO cdto) {
+        System.out.println("Hay un total de " + cdto.numeroPeliculas() + " de películas en la BBDD.");
+    }
 
-    
-
-    
-    
 }

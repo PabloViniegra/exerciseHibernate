@@ -97,7 +97,12 @@ public class Disponible  implements java.io.Serializable {
         this.pos = pos;
     }
 
+    @Override
+    public String toString() {
+        return "Disponible{" + "id=" + id + ", pid=" + pid + ", sid=" + sid + ", tid=" + tid + ", fila=" + fila + ", letra=" + letra + ", butacas=" + butacas + ", estado=" + estado + ", pos=" + pos + '}';
+    }
 
+    
 
 
 }
