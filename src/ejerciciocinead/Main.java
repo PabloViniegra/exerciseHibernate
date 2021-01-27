@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 import mapping.Disponible;
+import mapping.PaseSala;
 import mapping.Peliculas;
 
 /**
@@ -26,6 +27,7 @@ public class Main {
         int opcion = -1;
         CineDTO cdto = new CineDTO();
         DisponibleDTO dto = new DisponibleDTO();
+        PaseSalaDTO pdto = new PaseSalaDTO();
         List<Peliculas> peliculas = null;
         List<Disponible> disponibles = null;
         do {
@@ -38,6 +40,7 @@ public class Main {
             System.out.println("6. Número de peliculas");
             System.out.println("7. Películas donde trabaja un actor");
             System.out.println("8. Reservar sala");
+            System.out.println("9. Todos los horarios de una pelicula");
             System.out.println("0. Salir");
             System.out.print("Introduce opcion: ");
             opcion = sc.nextInt();
@@ -68,6 +71,8 @@ public class Main {
                 case 8:
                     verSalaDisponible(disponibles, sc, dto);
                     break;
+                case 9:
+                    verHorariosDeEstaPelicula(peliculas,cdto,sc,pdto);
             }
         } while (opcion != 0);
     }
@@ -135,6 +140,12 @@ public class Main {
             System.out.print("Nuevo Director: ");
             peliculaMod.setDirector(sc.nextLine());
         }
+        System.out.print("¿Quieres actualizar el género?[si/no]");
+        respuesta = sc.nextLine();
+        if (respuesta.equalsIgnoreCase("si")) {
+            System.out.print("Nuevo Género: ");
+            peliculaMod.setGenero(sc.nextLine());
+        }
         cdto.actualizaPelicula(peliculaMod);
         System.out.println("Datos actualizados");
     }
@@ -160,8 +171,6 @@ public class Main {
 
     }
 
-    
-
     private static void verPeliculasDeActor(CineDTO cdto, Scanner sc) {
         System.out.print("Nombre del actor: ");
         String respuesta = sc.nextLine();
@@ -182,6 +191,48 @@ public class Main {
 
     private static void numeroDePelículas(CineDTO cdto) {
         System.out.println("Hay un total de " + cdto.numeroPeliculas() + " de películas en la BBDD.");
+    }
+
+    private static void verHorariosDeEstaPelicula(List<Peliculas> peliculas, CineDTO cdto, Scanner sc, PaseSalaDTO pdto) {
+        verPeliculas(cdto, peliculas);
+        List<PaseSala> pases_salas;
+        System.out.print("Elige el id de la pelicula para ver: ");
+        int idPelicula = sc.nextInt();
+        sc.nextLine();
+        Peliculas pelicula = cdto.obtenPelicula(idPelicula);
+        pases_salas = pdto.dimeHorariosDePelicula(pelicula);
+        if (pases_salas != null) {
+            pases_salas.forEach(p -> {
+            String hora = null;
+            switch(p.getTid()) {
+                case 1:
+                    hora = "16:00";
+                    break;
+                case 2:
+                    hora = "16:30";
+                    break;
+                case 3:
+                    hora = "17:00";
+                    break;
+                case 4:
+                    hora = "17:30";
+                    break;
+                case 5:
+                    hora = "18:00";
+                    break;
+                case 7:
+                    hora = "18:30";
+                    break;
+                case 8:
+                    hora = "19:00";
+                    break;
+            }
+            System.out.println("Sala " + p.getSid() + " a las " + hora);
+        });
+        } else {
+            System.out.println("No hay horarios para esta película");
+        }
+        
     }
 
 }
